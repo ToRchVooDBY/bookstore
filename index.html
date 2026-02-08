@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Книжная лавка — купить книги</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">Книжная лавка</a>
+      <nav class="nav">
+        <a href="#catalog">Каталог</a>
+        <a href="#order">Оформить заказ</a>
+        <a href="#cart" class="cart-link" id="cartLink">
+          Корзина <span class="cart-count" id="cartCount">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Книги, которые меняют взгляд на мир</h1>
+        <p>Выберите книгу и оформите заказ — доставим или отправим электронно.</p>
+      </div>
+    </section>
+
+    <section class="catalog" id="catalog">
+      <div class="container">
+        <div class="catalog-header">
+          <h2>Каталог</h2>
+          <button type="button" class="btn btn-add" id="addBookBtn">+ Добавить книгу</button>
+        </div>
+        <div class="cards" id="bookCards"></div>
+      </div>
+    </section>
+
+    <!-- Модальное окно: добавить / редактировать книгу -->
+    <div class="modal-overlay" id="bookModal" aria-hidden="true">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 id="modalTitle">Добавить книгу</h3>
+          <button type="button" class="modal-close" id="modalClose" aria-label="Закрыть">&times;</button>
+        </div>
+        <form class="book-form" id="bookForm">
+          <input type="hidden" name="id" id="bookId" value="">
+          <label>
+            <span>Название *</span>
+            <input type="text" name="title" required placeholder="Название книги">
+          </label>
+          <label>
+            <span>Автор *</span>
+            <input type="text" name="author" required placeholder="Имя автора">
+          </label>
+          <label>
+            <span>Цена (₽) *</span>
+            <input type="number" name="price" required min="1" placeholder="500">
+          </label>
+          <label>
+            <span>Ссылка на обложку</span>
+            <input type="url" name="imageUrl" placeholder="https://... или оставьте пустым">
+          </label>
+          <label>
+            <span>Описание книги</span>
+            <textarea name="description" rows="4" placeholder="Краткое описание или аннотация"></textarea>
+          </label>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-outline" id="modalCancel">Отмена</button>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <section class="order-section" id="order">
+      <div class="container">
+        <h2>Оформление заказа</h2>
+        <div class="order-layout">
+          <div class="cart-summary" id="cartSummary">
+            <h3>Ваша корзина</h3>
+            <ul class="cart-list" id="cartList"></ul>
+            <p class="cart-total">Итого: <strong id="cartTotal">0 ₽</strong></p>
+          </div>
+          <form class="order-form" id="orderForm">
+            <h3>Данные для доставки</h3>
+            <label>
+              <span>Имя *</span>
+              <input type="text" name="name" required placeholder="Как к вам обращаться">
+            </label>
+            <label>
+              <span>Телефон *</span>
+              <input type="tel" name="phone" required placeholder="+7 (999) 000-00-00">
+            </label>
+            <label>
+              <span>Email *</span>
+              <input type="email" name="email" required placeholder="email@example.com">
+            </label>
+            <label>
+              <span>Адрес доставки</span>
+              <textarea name="address" rows="3" placeholder="Город, улица, дом, квартира"></textarea>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="agree" required>
+              <span>Согласен с условиями обработки персональных данных *</span>
+            </label>
+            <button type="submit" class="btn btn-submit">Перейти к оплате</button>
+          </form>
+
+        <div class="payment-block" id="paymentBlock" hidden>
+          <div class="payment-card">
+            <h3>Оплата заказа</h3>
+            <p class="payment-summary">К оплате: <strong id="paymentTotal">0 ₽</strong></p>
+            <form class="payment-form" id="paymentForm">
+              <fieldset class="payment-method">
+                <legend>Способ оплаты</legend>
+                <label class="radio-label">
+                  <input type="radio" name="paymentMethod" value="card" checked>
+                  <span>Картой онлайн</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="paymentMethod" value="onDelivery">
+                  <span>При получении (наличными или картой)</span>
+                </label>
+              </fieldset>
+              <div class="payment-card-fields" id="cardFields">
+                <label>
+                  <span>Номер карты</span>
+                  <input type="text" name="cardNumber" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" autocomplete="off">
+                </label>
+                <div class="payment-row">
+                  <label>
+                    <span>Срок действия</span>
+                    <input type="text" name="cardExpiry" id="cardExpiry" placeholder="ММ/ГГ" maxlength="5" autocomplete="off">
+                  </label>
+                  <label>
+                    <span>CVC</span>
+                    <input type="text" name="cardCvc" id="cardCvc" placeholder="123" maxlength="4" autocomplete="off">
+                  </label>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-submit" id="paymentSubmit">Оплатить</button>
+            </form>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© Книжная лавка. Все права защищены.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

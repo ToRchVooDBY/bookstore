@@ -1,0 +1,696 @@
+/* --- Переменные --- */
+:root {
+  --bg: #faf8f5;
+  --bg-card: #fff;
+  --paper: #f5e6d3;
+  --ink: #2c2420;
+  --ink-muted: #5c524a;
+  --accent: #8b6914;
+  --accent-hover: #6b5010;
+  --border: #e5ddd0;
+  --shadow: 0 4px 20px rgba(44, 38, 32, 0.08);
+  --radius: 12px;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Manrope", system-ui, sans-serif;
+}
+
+/* --- Сброс и база --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Контейнер --- */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- Шапка --- */
+.header {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav a {
+  color: var(--ink-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav a:hover {
+  color: var(--accent);
+}
+
+.cart-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.cart-count {
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  min-width: 1.4rem;
+  text-align: center;
+}
+
+/* --- Hero --- */
+.hero {
+  background: linear-gradient(135deg, var(--paper) 0%, #ebe0d0 100%);
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: var(--ink);
+}
+
+.hero p {
+  margin: 0;
+  color: var(--ink-muted);
+  font-size: 1.1rem;
+}
+
+/* --- Каталог --- */
+.catalog {
+  padding: 4rem 0;
+}
+
+.catalog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.catalog-header h2 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--ink);
+}
+
+.btn-add {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-add:hover {
+  background: var(--accent-hover);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(44, 38, 32, 0.12);
+}
+
+.card-image {
+  aspect-ratio: 280 / 400;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-body h3 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+  line-height: 1.3;
+}
+
+.author {
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+  margin: 0 0 0.5rem;
+}
+
+.card-description {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  line-height: 1.4;
+  margin: 0 0 0.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.price {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 0 0 0.75rem;
+  color: var(--accent);
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.65rem 1.25rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-card {
+  background: var(--ink);
+  color: #fff;
+  flex: 1;
+  min-width: 100px;
+}
+
+.btn-card:hover {
+  background: var(--accent);
+}
+
+.btn-card.added {
+  background: var(--accent);
+  pointer-events: none;
+}
+
+.btn-edit,
+.btn-delete {
+  padding: 0.5rem 0.75rem;
+  font-size: 1.1rem;
+  line-height: 1;
+  background: var(--border);
+  color: var(--ink-muted);
+}
+
+.btn-edit:hover {
+  background: #d5cfc4;
+  color: var(--accent);
+}
+
+.btn-delete:hover {
+  background: #e8c4c4;
+  color: #b33;
+}
+
+/* --- Оформление заказа --- */
+.order-section {
+  padding: 4rem 0;
+  background: linear-gradient(180deg, transparent 0%, var(--paper) 30%, var(--paper) 100%);
+}
+
+.order-section h2 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 2rem;
+  color: var(--ink);
+}
+
+.order-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .order-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cart-summary {
+  background: var(--bg-card);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.cart-summary h3 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  margin: 0 0 1rem;
+}
+
+.cart-list {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.cart-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cart-list li:last-child {
+  border-bottom: none;
+}
+
+.cart-total {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.cart-total strong {
+  color: var(--accent);
+}
+
+/* --- Форма --- */
+.order-form {
+  background: var(--bg-card);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.order-form h3 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  margin: 0 0 1rem;
+}
+
+.order-form label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.order-form label span {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+  margin-bottom: 0.35rem;
+}
+
+.order-form input[type="text"],
+.order-form input[type="tel"],
+.order-form input[type="email"],
+.order-form textarea {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.order-form input:focus,
+.order-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.order-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.checkbox-label input {
+  margin-top: 0.25rem;
+}
+
+.checkbox-label span {
+  margin-bottom: 0;
+}
+
+.btn-submit {
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.btn-submit:hover {
+  background: var(--accent-hover);
+}
+
+/* --- Блок оплаты --- */
+.payment-block {
+  grid-column: 1 / -1;
+  margin-top: 1rem;
+}
+
+.payment-card {
+  background: var(--bg-card);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-width: 420px;
+}
+
+.payment-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  margin: 0 0 0.5rem;
+}
+
+.payment-summary {
+  margin: 0 0 1.25rem;
+  font-size: 1.1rem;
+}
+
+.payment-summary strong {
+  color: var(--accent);
+}
+
+.payment-form label span {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+  margin-bottom: 0.35rem;
+}
+
+.payment-form input {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+}
+
+.payment-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.payment-method {
+  border: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+}
+
+.payment-method legend {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  margin-bottom: 0.5rem;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.radio-label input {
+  width: auto;
+}
+
+.payment-card-fields {
+  margin-bottom: 1.25rem;
+}
+
+.payment-card-fields label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.payment-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* --- Модальное окно --- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(44, 38, 32, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 200;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px rgba(44, 38, 32, 0.2);
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-header h3 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--ink-muted);
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: var(--ink);
+}
+
+.book-form {
+  padding: 1.5rem;
+}
+
+.book-form label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.book-form label span {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+  margin-bottom: 0.35rem;
+}
+
+.book-form input {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+}
+
+.book-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.book-form textarea {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.book-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.modal-actions .btn {
+  flex: 1;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--ink-muted);
+  border: 1px solid var(--border);
+}
+
+.btn-outline:hover {
+  border-color: var(--ink-muted);
+  color: var(--ink);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+/* --- Подвал --- */
+.footer {
+  margin-top: auto;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+}
+
+/* --- Уведомление --- */
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--ink);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+  z-index: 1000;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* --- Пустая корзина --- */
+.cart-summary.empty .cart-list {
+  display: none;
+}
+
+.cart-summary.empty .cart-total {
+  display: none;
+}
+
+.cart-summary .empty-msg {
+  color: var(--ink-muted);
+  margin: 0;
+}
